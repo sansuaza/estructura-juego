@@ -4,6 +4,8 @@ public class Operando {
 
     public Operando(int valor, int operador){
         this.valor = valor;
+        //operador = 1 es resta
+        //operador = 2 es suma
         this.operador = operador;
     }
 
