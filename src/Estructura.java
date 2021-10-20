@@ -13,8 +13,9 @@ public class Estructura {
         ArrayList<Integer> enterosUsados = new ArrayList<Integer>();
         for (int i = 0; i < numNiveles - 1; i++) {
             switch (i){
-                case 0: operaciones.add(new Operacion(numBase, enterosUsados));
-                default: operaciones.add(new Operacion(numBase+i, enterosUsados));
+                case 0: operaciones.add(new Operacion(numBase, enterosUsados, 8));
+                case 1: operaciones.add(new Operacion(numBase, enterosUsados));
+                default: operaciones.add(new Operacion(numBase+i-1, enterosUsados));
             }
         }
     }

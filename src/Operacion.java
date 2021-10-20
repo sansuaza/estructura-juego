@@ -5,6 +5,13 @@ public class Operacion {
 
     public Operacion(int cantOperandos, ArrayList<Integer> numUsados){
         operandos = new ArrayList<>();
+        build(cantOperandos, numUsados);
+    }
+
+    public Operacion(int cantOperandos, ArrayList<Integer> numUsados, int valorInicial){
+        //Constructor hacer la primera operacion de la estructura.
+        operandos = new ArrayList<>();
+        build(cantOperandos, numUsados, valorInicial);
     }
 
     public void build(int cantOperandos, ArrayList<Integer> enterosUsados){
@@ -15,17 +22,33 @@ public class Operacion {
             if(i == cantOperandos - 1){
                 double valor = Math.random()*9 +1;
                 addOperando(new Operando((int) valor, 0));
-                }else {
-                    double valorUsado = obtenerValorUsado(enterosUsados);
-                    double operador = Math.random() * 2 + 1;
-                    if (i == 0) {
-                        Operando primerOperando = new Operando((int) valorUsado, (int) operador);
-                        addOperando(primerOperando);
-                    } else {
-                        addOperando(new Operando((int) valorUsado, (int) operador));
-                    }
+            }else {
+                double valorUsado = obtenerValorUsado(enterosUsados);
+                double operador = Math.random() * 2 + 1;
+                if (i == 0) {
+                    Operando primerOperando = new Operando((int) valorUsado, (int) operador);
+                    addOperando(primerOperando);
+                } else {
+                    addOperando(new Operando((int) valorUsado, (int) operador));
                 }
             }
+        }
+    }
+
+    public void build(int cantOperandos, ArrayList<Integer> enterosUsados, int valorInicial){
+
+        for (int i = 0; i<cantOperandos; i++){
+            if(i == 0) {
+                double operador = Math.random() * 2 + 1;
+                addOperando(new Operando(valorInicial, (int) operador));
+                enterosUsados.add(valorInicial);
+            }
+            else{
+                double valor = Math.random()*9 +1;
+                addOperando(new Operando((int) valor, 0));
+                enterosUsados.add((int)valor);
+            }
+        }
     }
 
     private int obtenerValorUsado(ArrayList<Integer> valoresUsados){
@@ -34,6 +57,7 @@ public class Operacion {
         while(noEncontrado){
             retornoTentativo = valoresUsados.get((int) Math.random() * valoresUsados.size());
             if(!containsValue(retornoTentativo)) return retornoTentativo;
+            noEncontrado = false;
         }
         return retornoTentativo;
     }
