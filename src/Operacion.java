@@ -7,12 +7,10 @@ public class Operacion {
     ArrayList<Integer> usadosGlobales = new ArrayList<>();
 
     public Operacion(int cantOperandos, ArrayList<Integer> numUsados){
-        System.out.println(numUsados.size());
         usadosGlobales.addAll(numUsados);
         operandos = new ArrayList<>();
         build(cantOperandos, numUsados);
         RESULTAD0 = hacerOperacion();
-        ownToString();
     }
 
     public Operacion(int cantOperandos, ArrayList<Integer> numUsados, int valorInicial){
@@ -20,7 +18,6 @@ public class Operacion {
         operandos = new ArrayList<>();
         build(cantOperandos, numUsados, valorInicial);
         RESULTAD0 = hacerOperacion();
-        ownToString();
     }
 
     public void build(int cantOperandos, ArrayList<Integer> enterosUsados){
@@ -36,17 +33,7 @@ public class Operacion {
                 double valorUsado = obtenerValorUsado();
                 removeUsado((int)valorUsado);
                 double operador = Math.random() * 2 + 1;
-                System.out.println(operador);
                 addOperando(new Operando((int) valorUsado, (int) operador));
-            }
-        }
-    }
-
-    public void removeUsado(int valToRem){
-        for (int i = 0; i <usadosGlobales.size(); i++) {
-            if (usadosGlobales.get(i) == valToRem){
-                usadosGlobales.remove(i);
-                break;
             }
         }
     }
@@ -59,7 +46,7 @@ public class Operacion {
                 enterosUsados.add(valorInicial);
             }
             else{
-                double valor = Math.random()*NUM_POSIBLES +1;
+                double valor = getNewValor();
                 addOperando(new Operando((int) valor, 0));
                 enterosUsados.add((int)valor);
             }
@@ -70,12 +57,19 @@ public class Operacion {
         boolean noEncontrado = true;
         int retornoTentativo=0;
         while(noEncontrado){
-            System.out.println("El ciclo too loco");
-            double i= Math.random() * usadosGlobales.size();
-            retornoTentativo = usadosGlobales.get((int)i);
-            if(!containsValue(retornoTentativo)) noEncontrado = false;
+                double i = Math.random() * usadosGlobales.size();
+                retornoTentativo = usadosGlobales.get((int) i);
+                if (!containsValue(retornoTentativo)) noEncontrado = false;
         }
         return retornoTentativo;
+    }
+
+    private String impresion(ArrayList<Operando> op){
+        String retorno = "";
+        for (Operando ope: op) {
+            retorno += ope.valor+", ";
+        }
+        return retorno;
     }
 
     public boolean containsValue(int value){
@@ -96,6 +90,15 @@ public class Operacion {
             }
         }
         return retorno;
+    }
+
+    public void removeUsado(int valToRem){
+        for (int i = 0; i <usadosGlobales.size(); i++) {
+            if (usadosGlobales.get(i) == valToRem){
+                usadosGlobales.remove(i);
+                break;
+            }
+        }
     }
 
     public void addOperando(Operando op){

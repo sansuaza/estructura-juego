@@ -5,10 +5,8 @@ public class Aplication {
         AdivinaValor adivinaValor = new AdivinaValor();
         System.out.println("Inicio de la construccion de la estructura");
 
-        Estructura estructura = new Estructura(8, 4);
-        System.out.println(estructura.ownToString());
-
-
+            Estructura estructura = new Estructura(999, 6);
+            System.out.println(estructura.ownToString());
         /*ArrayList<Integer> valoresUsados = new ArrayList<>();
         valoresUsados.add(1);
         valoresUsados.add(7);

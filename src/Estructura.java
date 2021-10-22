@@ -11,12 +11,13 @@ public class Estructura {
     private void build(int numNiveles){
         final int numBase = 2;
         ArrayList<Integer> enterosUsados = new ArrayList<Integer>();
-        for (int i = 0; i < numNiveles; i++) {
+        for (int i = 0; i < 6; i++) {
             switch (i){
-                case 0: operaciones.add(new Operacion(numBase, enterosUsados, 8)); break;
+                case 0: operaciones.add(new Operacion(numBase, enterosUsados, 10)); break;
                 default: operaciones.add(new Operacion(numBase+i, enterosUsados));
             }
         }
+
     }
 
     public String ownToString(){
